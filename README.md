@@ -1,5 +1,4 @@
-# DMT Assignment 2
-This repository is for the assignment 2 of Data Mining Technique at Vrije Universiteit (VU) Amsterdam.
+# Learn to rank
 
 ## Competition
 The competition for this assignment is held on Kaggle platform. Click [here](https://www.kaggle.com/competitions/dmt-2024-2nd-assignment) for detail.
@@ -24,6 +23,11 @@ Check the missing rate, number of categories and outliers of each dimension feat
 
 ### Handking Noise and Missing Values
 
+#### outlier removal
+
+##### probability distribution
+Chauvenet's criterion
+
 ### 3. Normalize
 group by prop_id
 
@@ -36,3 +40,7 @@ group by prop_id
 
 ### RankNet
 特征工程不足: 如果特征工程不足，即未能提取出对排序任务有意义的特征，那么简单的线性模型可能更容易理解和适应数据
+
+# temporal data
+##
+Kalman Filter: identifies outliers and also replaces these with new values
