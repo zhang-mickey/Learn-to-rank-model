@@ -66,11 +66,16 @@ Chauvenet's criterion
 ### 3. Normalize
 group by prop_id
 
-#### 
-众数 平均数来填充
-### 4. Correlation analysis and feature selection
-![image](https://github.com/montpelllier/VU-DMT-A2/assets/145342600/014b2e93-aa79-45e3-b8ae-c5f46e3a1693)
+##  离散排序 
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/2066920d-0cb7-443d-a8b3-fff5d3f3b923)
 
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/51bfa954-90b3-46ac-bc3f-f7e11ffbd74b)
+
+每个特征从以上4个维度中各取一到两个进行组合，再从历史数据中统计该组合特征最终的特征值。
+
+比如，商品（实体）最近1天（时间）的曝光（行为）量（统计指标）、商品所在店铺（实体）最近30天（时间）的销量（行为类型+统计维度）等等。
+
+由以上方法产生的特征数量级，相当于4个维度的笛卡尔积。
 ## GBDT
 
 ### 特征工程
