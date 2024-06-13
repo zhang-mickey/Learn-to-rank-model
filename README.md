@@ -67,6 +67,7 @@ users.
 
 
 ## two tower architecture
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/b125fecd-c93b-46a9-a401-46070f60aad2)
 
 # Rank
 ## 粗排：
