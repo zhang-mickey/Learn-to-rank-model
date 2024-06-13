@@ -1,4 +1,59 @@
-# 推荐
+# 推荐   E-commerce search
+大规模推荐系统
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/325a1634-793c-424d-b36e-cc74b653e7f3)
+term mismatch between queries and items
+#  query processing
+NLP技术：从基础的分词、NER，到应用上的Query分析、基础相关
+
+tokenization, spelling correction, query expansion and rewriting.
+## query rewriting 
+transforms the original query to
+another similar query that might beer represent the search need 
+
+learning query
+rewrites  as an indirect approach to bridge vocabulary gap
+between queries and documents. 
+
+
+#  召回阶段  candidate retrieval
+从全量信息集合中触发尽可能多的正确结果 
+
+## 基于关键字的倒排索引
+计算关键字在问题集中的 TF-IDF 以及 BM（Best Matching）25 得分，并建立倒排索引表
+
+### 第三方库 Elasticsearch 
+elasticsearch是面向文档（Document）存储的，可以是数据库中的一条商品数据，一个订单信息。文档数据会被序列化为json格式后存储在elasticsearch中
+
+
+### 正向索引
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/320d2b75-e897-4b5c-9983-0436215b886a)
+如果是根据id查询，那么直接走索引，查询速度非常快。
+
+但如果是基于title做模糊查询，只能是逐行扫描数据
+### 倒排索引 inverted indexes 
+
+**Problem**:cannot retrieve dierent items according to the current
+user’s characteristics
+
+hand-crafed
+
+indexing tags for items
+
+ building separate indexes for dierent group of
+users. 
+
+## Semantic Retrieval  基于向量的语义召回
+基于 BERT 向量的语义检索
+
+对候选问题集合进行向量编码，得到 corpus 向量矩阵
+
+当用户输入 query 时，同样进行编码得到 query 向量表示
+
+然后进行语义检索（矩阵操作，KNN，FAISS）
+### 分解user-item矩阵
+
+
+
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/66a0a534-5d2a-4afd-b10f-dd170e21b91b)
 
 推荐物品主要包含两部分。一个是搜索词，涉及到Query意图、核心词抽取、语义完整性等NLP技术，或者Query相关的信息流消费pv、索引网页的数量、信息流的分类、不同时间窗口的趋势，还有安全相关的质量控制。
@@ -10,6 +65,10 @@
 ## query自动补全
 更加关注topN满足率 
 
+
+## two tower architecture
+
+# Rank
 ## 粗排：
 消费者行为个性化是指把消费者的浏览数据、购买数据使用到搜索排序中，当消费者用搜索时，可以快捷方便的找到这些商品。随后消费者性别模型、消费者购买力模型等数据也会被应用到搜索排序中，使排序多样化，满足不同消费者的不同搜索需求。
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a137786c-fc1c-45d6-a7aa-0da848c6465e)
@@ -29,42 +88,13 @@
 ## 精排
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/ff9f90fb-f702-4dcc-813f-2008e52878ca)
 ### CTR、CVR
-# Learn to rank
+
 将商家排序问题建模为点击率、转化率、客单价等指标的预测问题
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/e48876bd-6d11-416a-911f-e4c50cb625de)
 
 ## 
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/dfbcd1c7-5b9f-42dd-a952-a53605b5b00a)
 
-## Competition
-The competition for this assignment is held on Kaggle platform. Click [here](https://www.kaggle.com/competitions/dmt-2024-2nd-assignment) for detail.
-Besides, the original competition can be found on Kaggle as well by clicking [this](https://www.kaggle.com/c/expedia-personalized-sort).
-### Dataset 
-The dataset is available on [here](https://www.kaggle.com/competitions/dmt-2024-2nd-assignment/data).
-### Metric
-The evaluation metric for this competition is Normalized Discounted Cumulative Gain.
-
-## Exploring the dataset
-[//]: # (In EDA, )
-### 1. Overview of dataset
-View the overall situation of the data set by functions like `head()`, `tail()`, `describe()` and `info()`.
-Those information consists of mean value, data type, data size, non-null count and so on.
-
-### 2. Missing data and anomalies
-Features are classified into date, category, numerical, and text features. 
-Check the missing rate, number of categories and outliers of each dimension feature.
-
-### Converting the raw data to an aggregated data format
-
-### Handking Noise and Missing Values
-
-#### outlier removal
-
-##### probability distribution
-Chauvenet's criterion
-
-### 3. Normalize
-group by prop_id
 
 ##  离散排序 
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/2066920d-0cb7-443d-a8b3-fff5d3f3b923)
@@ -78,20 +108,9 @@ group by prop_id
 由以上方法产生的特征数量级，相当于4个维度的笛卡尔积。
 ## GBDT
 
-### 特征工程
-• 按照小时数hour划分
-用户行为数据，取前后
-n个小时数据进行衰减
-后线性加权
 
-• 按照星期数weekday
-划分用户行为数据，按
-照不同的相似度关系衰
-减后线性加权
 
 
  
-### Elasticsearch  全文检索
 
-#### 倒排索引
 
