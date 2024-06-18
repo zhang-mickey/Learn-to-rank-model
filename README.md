@@ -122,6 +122,19 @@ XGBoost 的特征重要性:
 	3.	Frequency：
 	•	也称为 “weight”，是特征在所有树中被使用的次数。
 	•	计算过程：统计每个特征在所有树中被用作分裂节点的次数，然后进行累加
+
+
+## FM（Factorization Machines）向量分解机
+FM 模型的核心思想是将高维稀疏特征映射到低维的密集向量空间。具体来说，FM 模型通过隐向量来表示特征之间的交互作用。
+
+引入矩阵分解技术来捕捉特征之间的交互作用 通过将所有的ID特征映射到同一个隐向量空间，使得这些向量之间可以进行直接比较和运算
+	•	能够有效捕捉特征之间的二阶交互作用。
+	•	在处理稀疏数据上表现良好。
+	•	计算复杂度较低，适合大规模数据集
+FM本质上是一个线性模型，不同项之间以线性组合的方式影响模型的输出
+## FFM（Field-aware Factorization Machines ）
+FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都是用于推荐系统和大规模稀疏数据集建模的机器学习算法
+
 ## GBDT
 
 
