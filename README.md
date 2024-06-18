@@ -3,9 +3,14 @@
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/325a1634-793c-424d-b36e-cc74b653e7f3)
 term mismatch between queries and items
 
+## 数据循环
+算法决定展示内容，展示内容影响用户行为，而用户行为反馈又会决定后续算法的学习，形成循环。在这种循环下，训练集和测试集与监督学习独立同分布的假设相去甚远，同时系统层面上缺乏有效探索机制的设计，可能导致模型更聚焦于局部最优。
+
+在用户行为稀疏的场景下，数据循环问题尤其显著。问题的本质：有限的数据无法获得绝对置信的预估，探索和利用（Explore&Exploit）是突破数据循环的关键。
+
 
 # cold start solutions
-新用户冷启动
+新用户冷启动  新上架的物品没有历史行为数据
 
 提供非个性化的推荐(用户冷启动)
 1）热门商品
@@ -23,6 +28,16 @@ term mismatch between queries and items
 3）利用社交关系，将好友喜欢的商品推荐给你
 
 
+## DropoutNet
+
+## Contextual Bandit 
+与传统方法的区别：
+
+每个候选商品学习一个独立的模型，避免传统大一统模型的样本分布不平衡问题
+
+传统方法采用贪心策略，尽最大可能利用已学到的知识，易因马太效应陷入信息茧房；Bandit算法有显式的exploration机制，曝光少的物品会获得更高的展现加权
+
+是一种在线学习方案，模型实时更新；相较A/B测试方案，能更快地收敛到最优策略
 
 # user profiling
 
