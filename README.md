@@ -2,6 +2,30 @@
 大规模推荐系统
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/325a1634-793c-424d-b36e-cc74b653e7f3)
 term mismatch between queries and items
+
+
+# cold start solutions
+新用户冷启动
+
+提供非个性化的推荐(用户冷启动)
+1）热门商品
+
+2）人工指定策略
+
+3）提供多样性的选择
+
+利用用户的注册信息(用户冷启动、系统冷启动)
+
+1）基于用户信息，比如年龄，性别，地域、学历、职业等做推荐
+
+2）让用户选择兴趣点，让用户选择自己喜欢的分类标签（避免选项太多，操作复杂）
+
+3）利用社交关系，将好友喜欢的商品推荐给你
+
+
+
+# user profiling
+
 #  query processing
 NLP技术：从基础的分词、NER，到应用上的Query分析、基础相关
 
@@ -70,6 +94,9 @@ users.
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/b125fecd-c93b-46a9-a401-46070f60aad2)
 
 # Rank
+历史上粗排模型经历了从最简单的统计反馈模型发展到了特征裁剪下的轻量级LR或FM模型以及当前双塔深度学习模型
+
+双塔结构限定了用户侧与物品侧没法进行特征交叉 
 ## 粗排：
 消费者行为个性化是指把消费者的浏览数据、购买数据使用到搜索排序中，当消费者用搜索时，可以快捷方便的找到这些商品。随后消费者性别模型、消费者购买力模型等数据也会被应用到搜索排序中，使排序多样化，满足不同消费者的不同搜索需求。
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a137786c-fc1c-45d6-a7aa-0da848c6465e)
