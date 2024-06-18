@@ -138,8 +138,25 @@ FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都
 ## GBDT
 
 
+## Mixture-of-Experts
+Mixture of Experts architectures enable large-scale models, even those comprising many billions of parameters, to greatly reduce computation costs during pre-training and achieve faster performance during inference time. Broadly speaking, it achieves this efficiency through selectively activating only the specific experts needed for a given task, rather than activating the entire neural network for every task.
 
+## MMOE Multi-gate Mixture-of-Experts
 
- 
+DNN-based multi-task
+learning models are sensitive to factors such as the data distribution
+differences and relationships among tasks
+
+The inherent
+conicts from task dierences can actually harm the predictions of
+at least some of the tasks, particularly when model parameters are
+extensively shared among all tasks.
+
+### Shared-Bottom multi-task DNN structure
+
+## Transformer
+Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur. Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
+#### AUC
+
 
 
