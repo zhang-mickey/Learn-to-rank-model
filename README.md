@@ -112,6 +112,11 @@ users.
 历史上粗排模型经历了从最简单的统计反馈模型发展到了特征裁剪下的轻量级LR或FM模型以及当前双塔深度学习模型
 
 双塔结构限定了用户侧与物品侧没法进行特征交叉 
+
+## pointwise pairwise listwise 
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a86bdf50-a53c-46ab-95d4-97254890fed9)
+
+
 ## 粗排：
 消费者行为个性化是指把消费者的浏览数据、购买数据使用到搜索排序中，当消费者用搜索时，可以快捷方便的找到这些商品。随后消费者性别模型、消费者购买力模型等数据也会被应用到搜索排序中，使排序多样化，满足不同消费者的不同搜索需求。
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a137786c-fc1c-45d6-a7aa-0da848c6465e)
