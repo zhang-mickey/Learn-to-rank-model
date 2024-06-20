@@ -10,6 +10,9 @@ term mismatch between queries and items
 
 
 # cold start solutions
+
+cold start is equivalent to the missing data problem where preference information is missing
+
 新用户冷启动  新上架的物品没有历史行为数据
 
 提供非个性化的推荐(用户冷启动)
@@ -56,6 +59,27 @@ between queries and documents.
 
 #  召回阶段  candidate retrieval
 从全量信息集合中触发尽可能多的正确结果 
+
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/8bd2b1b1-1c25-4ee1-a8d5-68599486178a)
+
+## ItemCF
+两个物品的受众重合度越大，两个物品的相似度越大
+## swing 召回通道
+如果大量用户同时喜欢两个物品，且这些用户之间的重合度很低，那么这两个物品一定很相似。
+
+Swing 算法与 ItemCF 算法的唯一区别在于计算物品相似度的公式不同。
+
+## UserCF
+## 矩阵补充
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/f8e1be1e-8058-4e36-9b2b-260ee2772ac3)
+
+## 双塔模型 two tower architecture
+
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/b125fecd-c93b-46a9-a401-46070f60aad2)
+
+## 正负样本
+
+## GNN召回
 
 ## 基于关键字的倒排索引
 计算关键字在问题集中的 TF-IDF 以及 BM（Best Matching）25 得分，并建立倒排索引表
@@ -105,8 +129,7 @@ users.
 更加关注topN满足率 
 
 
-## two tower architecture
-![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/b125fecd-c93b-46a9-a401-46070f60aad2)
+
 
 # Rank
 历史上粗排模型经历了从最简单的统计反馈模型发展到了特征裁剪下的轻量级LR或FM模型以及当前双塔深度学习模型
@@ -114,6 +137,12 @@ users.
 双塔结构限定了用户侧与物品侧没法进行特征交叉 
 
 ## pointwise pairwise listwise 
+pointwise 把召回看成二元分类
+
+pairwise 三元组
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d9ef1c17-d716-47a3-948e-f063e5a38571)
+
+
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a86bdf50-a53c-46ab-95d4-97254890fed9)
 
 
@@ -185,6 +214,8 @@ FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都
 ## GBDT
 
 
+## 重排
+
 ## Mixture-of-Experts
 Mixture of Experts architectures enable large-scale models, even those comprising many billions of parameters, to greatly reduce computation costs during pre-training and achieve faster performance during inference time. Broadly speaking, it achieves this efficiency through selectively activating only the specific experts needed for a given task, rather than activating the entire neural network for every task.
 
@@ -205,5 +236,10 @@ extensively shared among all tasks.
 Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur. Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
 #### AUC
 
+### A|B 测试
+
+随机分桶
+
+#### 分层实验
 
 
