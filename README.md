@@ -3,6 +3,16 @@
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/325a1634-793c-424d-b36e-cc74b653e7f3)
 term mismatch between queries and items
 
+## similarity
+### 余弦相似度 业界常用
+商品在表示成特征向量之后，两个特征向量之间的夹角越小，说明这两个向量越相似，也就是对应的两个商品越相似
+
+
+###  Exposure Bias
+
+### Popularity Bias
+推荐系统数据存在长尾现象，少部分流行度高的物品占据了大多数的交互
+
 ## 数据循环
 算法决定展示内容，展示内容影响用户行为，而用户行为反馈又会决定后续算法的学习，形成循环。在这种循环下，训练集和测试集与监督学习独立同分布的假设相去甚远，同时系统层面上缺乏有效探索机制的设计，可能导致模型更聚焦于局部最优。
 
@@ -123,11 +133,21 @@ users.
 
 另一个是搜索结果页的呈现，包括文章样式，搜索结果基础相关性、语义相关性、权威性、时效性，文章的意图、url点击分布。
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/7a729f34-5e38-4d58-9294-1356cee76924)
+
+
+## GeoHash 召回
+
+## 作者召回
+
+## 缓冲召回
+
 ## 查询query
 分词和查询Query的语义理解方面做到业务可用的效果，至少需要百万级有标注的商品和电商搜索关键词数据做训练
 ## query自动补全
 更加关注topN满足率 
 
+
+## 曝光过滤
 
 
 
@@ -184,6 +204,15 @@ pairwise 三元组
 
 由以上方法产生的特征数量级，相当于4个维度的笛卡尔积。
 
+
+
+## DPP 行列式点过程的推荐多样性提升
+
+矩阵的行列式的物理意义为矩阵中的各个向量张成的平行多面体体积的平方。这些向量彼此之间越不相似，向量间的夹角就会越大，张成的平行多面体的体积也就越大，矩阵的行列式也就越大，对应的商品集合的多样性也就越高。当这些向量彼此正交的时候，多样性达到最高
+
+
+
+
 ## XGBoost
 XGBoost 的特征重要性:
 
@@ -231,6 +260,11 @@ at least some of the tasks, particularly when model parameters are
 extensively shared among all tasks.
 
 ### Shared-Bottom multi-task DNN structure
+
+## NGCF
+用户和物品embedding的内积作为模型的预测结果
+## LightGCN
+图卷积神经网络
 
 ## Transformer
 Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur. Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
