@@ -246,6 +246,14 @@ FM本质上是一个线性模型，不同项之间以线性组合的方式影响
 ## FFM（Field-aware Factorization Machines ）
 FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都是用于推荐系统和大规模稀疏数据集建模的机器学习算法
 
+## Wide & Deep
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d3f2371e-05b0-4801-a716-8157cdc339fc)
+
+### wide 
+The wide component is a generalized linear model
+
+### Deep
+The deep component is a feed-forward neural network 
 
 ## DeepFM
 通过将Wide & Deep模型中的Wide侧模型替换成FM模型，实现自动的交叉特征选择，从而实现无需人工参与就可以通过模型进行端到端的学习，自动学习到各种层级的交叉特征
