@@ -7,18 +7,40 @@ term mismatch between queries and items
 
 合理选取训练数据。选取的训练数据的时间窗口不宜过长，当然也不能过短。具体的窗口期数值需要经过多次的实验来确定。同时可以考虑引入时间衰减，因为近期的用户行为更能反映用户接下来的行为动作。
 
+用户遇到信息过载才需要推荐系统，你确定你的产品真的需要推荐系统么？
+
+## 负采样
+用于处理推荐系统中数据稀疏和计算效率问题 
+
+为了平衡正负样本比例，我们只使用一小部分样本进行训练
+
+主要思想是将负样本的选择转化为随机采样的问题，
+
+### 流行度负采样
+
+一种简单的负采样方法是根据物品的流行度进行采样，流行度较高的更有可能成为负样本，因为用户对他们已经有了较多的反馈信息 
+
+
 ## 截断策略
 在生成推荐结果时，对结果列表进行截断或限制 
-### 基于 qualityscore 截断是一种 naive 的算法
+### qualityscore
+基于 qualityscore 截断是一种 naive 的算法
 
 ### wand
+
+
+
 ## similarity
 ### 余弦相似度 业界常用
 商品在表示成特征向量之后，两个特征向量之间的夹角越小，说明这两个向量越相似，也就是对应的两个商品越相似
 
 ## 优化和损失函数
 
-第一类 PointWise，就是通过直接预估单个的物品的得分去做排序，在精排环节中最常用；第二类叫PairWise，就是把排序问题看成是其中物品组成的任意pair，然后对比两两pair之间的顺序，所以样本就是这种物品对，这种在召回环节最常用；第三类是ListWise算法，就是需要考虑待排序的物品中任意之间的顺序，把整个列表当作样本，一般在重排环节用的比较多。当然越后面的算法复杂度是越高，
+第一类 PointWise，就是通过直接预估单个的物品的得分去做排序，在精排环节中最常用；
+
+第二类叫PairWise，就是把排序问题看成是其中物品组成的任意pair，然后对比两两pair之间的顺序，所以样本就是这种物品对，这种在召回环节最常用；
+
+第三类是ListWise算法，就是需要考虑待排序的物品中任意之间的顺序，把整个列表当作样本，一般在重排环节用的比较多。当然越后面的算法复杂度是越高，
 
 ## pointwise 
 pointwise 把召回看成二元分类
@@ -28,6 +50,8 @@ pairwise 三元组
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d9ef1c17-d716-47a3-948e-f063e5a38571)
 
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a86bdf50-a53c-46ab-95d4-97254890fed9)
+
+
 ### 贝叶斯个性化（BPR）
 训练样本就是一个UI矩阵，横轴表示所有的物品，纵轴表示所有的用户，然后矩阵里面填充的结果是用户对当前物品的打分值，可以是显式的隐式的，之前的思路是通过分解矩阵来填充里面空的格子，然后去预测用户的偏好。
 
@@ -270,6 +294,8 @@ Bloom Filter 是由一个长度为 m 的比特位数组 与 k 个哈希函数组
 消费者评论
 ### 用户搜索反馈
 反馈数据包括：某查询词结果中商品的点击量和下单量，消费者通过搜索进入商品单品页的平均时间，商品的搜索点击转化率。
+
+
 ## 精排
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/ff9f90fb-f702-4dcc-813f-2008e52878ca)
 ### CTR、CVR
@@ -341,14 +367,11 @@ Mixture of Experts architectures enable large-scale models, even those comprisin
 ## MMOE Multi-gate Mixture-of-Experts
 优化多目标排序
 
-DNN-based multi-task
-learning models are sensitive to factors such as the data distribution
-differences and relationships among tasks
+DNN-based multi-task learning models are sensitive to factors such as the data distribution differences and relationships among tasks
 
 The inherent
-conicts from task dierences can actually harm the predictions of
-at least some of the tasks, particularly when model parameters are
-extensively shared among all tasks.
+conticts from task dierences can actually harm the predictions of
+at least some of the tasks, particularly when model parameters are extensively shared among all tasks.
 
 ### Shared-Bottom multi-task DNN structure
 
@@ -362,7 +385,9 @@ extensively shared among all tasks.
 
 利用无标签数据，通过自监督方法预训练模型，提高对稀疏数据的处理能力。
 ## Transformer
-Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur. Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
+Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur.
+
+Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
 #### AUC
 
 ### A|B 测试
