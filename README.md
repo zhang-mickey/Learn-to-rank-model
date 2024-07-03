@@ -3,11 +3,46 @@
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/325a1634-793c-424d-b36e-cc74b653e7f3)
 term mismatch between queries and items
 
+电子商务的兴起，用户并非一定是带着明确的购买意图去浏览，很多时候是去“逛”的
+
+合理选取训练数据。选取的训练数据的时间窗口不宜过长，当然也不能过短。具体的窗口期数值需要经过多次的实验来确定。同时可以考虑引入时间衰减，因为近期的用户行为更能反映用户接下来的行为动作。
+
+## 截断策略
+在生成推荐结果时，对结果列表进行截断或限制 
+### 基于 qualityscore 截断是一种 naive 的算法
+
+### wand
 ## similarity
 ### 余弦相似度 业界常用
 商品在表示成特征向量之后，两个特征向量之间的夹角越小，说明这两个向量越相似，也就是对应的两个商品越相似
 
+## 优化和损失函数
 
+第一类 PointWise，就是通过直接预估单个的物品的得分去做排序，在精排环节中最常用；第二类叫PairWise，就是把排序问题看成是其中物品组成的任意pair，然后对比两两pair之间的顺序，所以样本就是这种物品对，这种在召回环节最常用；第三类是ListWise算法，就是需要考虑待排序的物品中任意之间的顺序，把整个列表当作样本，一般在重排环节用的比较多。当然越后面的算法复杂度是越高，
+
+## pointwise 
+pointwise 把召回看成二元分类
+
+pairwise 三元组
+
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d9ef1c17-d716-47a3-948e-f063e5a38571)
+
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a86bdf50-a53c-46ab-95d4-97254890fed9)
+### 贝叶斯个性化（BPR）
+训练样本就是一个UI矩阵，横轴表示所有的物品，纵轴表示所有的用户，然后矩阵里面填充的结果是用户对当前物品的打分值，可以是显式的隐式的，之前的思路是通过分解矩阵来填充里面空的格子，然后去预测用户的偏好。
+
+
+
+### 多任务
+
+多任务目标。比如视频推荐不仅需要预测用户是否会观看外，还希望去预测用户对于视频的评分，是否会关注该视频的上传者，否会分享到社交平台
+
+单个用户行为并不能准确反映用户对Item的好恶，例如一个用户播放某个视频，但是最后给了一个低分。并且这些行为之间不是相互独立的，可能会结合在一起决定用户对视频的偏好。所以，我们要结合这些行为分数在一起来评价用户的对某个视频的偏好。
+## 偏置信息
+### 位置偏置
+比如用户是否会点击和观看某个视频，并不一定是因为他喜欢，可能仅仅是因为它排在推荐页的最前面，这会导致训练数据产生位置偏置的问题。
+
+比较常用的做法是把位置作为一个参数带入模型训练和预测过程。
 ###  Exposure Bias
 
 ### Popularity Bias
@@ -21,7 +56,7 @@ term mismatch between queries and items
 在用户行为稀疏的场景下，数据循环问题尤其显著。问题的本质：有限的数据无法获得绝对置信的预估，探索和利用（Explore&Exploit）是突破数据循环的关键。
 
 
-# cold start solutions
+# 冷启动cold start solutions
 
 cold start is equivalent to the missing data problem where preference information is missing
 
@@ -55,6 +90,7 @@ cold start is equivalent to the missing data problem where preference informatio
 是一种在线学习方案，模型实时更新；相较A/B测试方案，能更快地收敛到最优策略
 
 # user profiling
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/2feca7c5-3983-42bb-becc-7d7058f50a02)
 
 #  query processing
 NLP技术：从基础的分词、NER，到应用上的Query分析、基础相关
@@ -72,16 +108,39 @@ between queries and documents.
 #  召回阶段  candidate retrieval
 从全量信息集合中触发尽可能多的正确结果 
 
+为了提高多样性召回一般使用多路通道
+
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/8bd2b1b1-1c25-4ee1-a8d5-68599486178a)
 
-## ItemCF
+## Co-occurrence Matrix
+
+用于表示用户和物品之间的交互频次或相关性
+
+用户与物品的交互往往非常稀疏，导致共同访问矩阵中大量的零值
+
+
+## ItemCF i2i
+i2i：通过计算item间的相似度，找到相似的item
+
 两个物品的受众重合度越大，两个物品的相似度越大
+
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/ac6b8b49-b542-49d8-993d-f7157db9912f)
+
+
+## Embedding召回
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/26eb301f-2bf2-4012-8592-8cdcef6c1207)
+### 如何embedding
+#### 基于Graph的Embedding
+核心思想是根据用户行为，构造user、item的关系图，然后采用Graph embedding方法实现对节点（即user、item）的embedding向量。
+
 ## swing 召回通道
 如果大量用户同时喜欢两个物品，且这些用户之间的重合度很低，那么这两个物品一定很相似。
 
 Swing 算法与 ItemCF 算法的唯一区别在于计算物品相似度的公式不同。
 
 ## UserCF
+u2i：通过计算user和item间的相似度，找到与user相似的item
+
 ## 矩阵补充
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/f8e1be1e-8058-4e36-9b2b-260ee2772ac3)
 
@@ -125,6 +184,7 @@ users.
 当用户输入 query 时，同样进行编码得到 query 向量表示
 
 然后进行语义检索（矩阵操作，KNN，FAISS）
+## 用户-物品矩阵的构建和处理方法
 ### 分解user-item矩阵
 
 
@@ -135,6 +195,32 @@ users.
 
 另一个是搜索结果页的呈现，包括文章样式，搜索结果基础相关性、语义相关性、权威性、时效性，文章的意图、url点击分布。
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/7a729f34-5e38-4d58-9294-1356cee76924)
+## 隐语义模型 LFM(latent factor model)
+![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/ec5fde86-bdd1-4422-8486-0ec9b1c9bdb4)
+
+
+
+## SVD
+
+## biasSVD
+
+
+## FM（Factorization Machines）向量分解机
+FM 模型的核心思想是将高维稀疏特征映射到低维的密集向量空间。具体来说，FM 模型通过隐向量来表示特征之间的交互作用。
+
+引入矩阵分解技术来捕捉特征之间的交互作用 通过将所有的ID特征映射到同一个隐向量空间，使得这些向量之间可以进行直接比较和运算
+	•	能够有效捕捉特征之间的二阶交互作用。
+	•	在处理稀疏数据上表现良好。
+	•	计算复杂度较低，适合大规模数据集
+FM本质上是一个线性模型，不同项之间以线性组合的方式影响模型的输出
+## FFM（Field-aware Factorization Machines ）
+FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都是用于推荐系统和大规模稀疏数据集建模的机器学习算法
+
+
+
+
+
+
 
 
 ## GeoHash 召回
@@ -160,18 +246,12 @@ users.
 Bloom Filter 是由一个长度为 m 的比特位数组 与 k 个哈希函数组成的数据结构
 
 # Rank
+对召回阶段输出的数百个内容，应用复杂的模型进行排序，选出其中最有可能被用户喜欢的
+
 历史上粗排模型经历了从最简单的统计反馈模型发展到了特征裁剪下的轻量级LR或FM模型以及当前双塔深度学习模型
 
 双塔结构限定了用户侧与物品侧没法进行特征交叉 
 
-## pointwise pairwise listwise 
-pointwise 把召回看成二元分类
-
-pairwise 三元组
-![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d9ef1c17-d716-47a3-948e-f063e5a38571)
-
-
-![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/a86bdf50-a53c-46ab-95d4-97254890fed9)
 
 
 ## 粗排：
@@ -235,23 +315,11 @@ XGBoost 的特征重要性:
 	3.	Frequency：
 	•	也称为 “weight”，是特征在所有树中被使用的次数。
 	•	计算过程：统计每个特征在所有树中被用作分裂节点的次数，然后进行累加
-## SVD
 
-## biasSVD
-
-
-## FM（Factorization Machines）向量分解机
-FM 模型的核心思想是将高维稀疏特征映射到低维的密集向量空间。具体来说，FM 模型通过隐向量来表示特征之间的交互作用。
-
-引入矩阵分解技术来捕捉特征之间的交互作用 通过将所有的ID特征映射到同一个隐向量空间，使得这些向量之间可以进行直接比较和运算
-	•	能够有效捕捉特征之间的二阶交互作用。
-	•	在处理稀疏数据上表现良好。
-	•	计算复杂度较低，适合大规模数据集
-FM本质上是一个线性模型，不同项之间以线性组合的方式影响模型的输出
-## FFM（Field-aware Factorization Machines ）
-FM（Factorization Machines）和 FFM（Field-aware Factorization Machines）都是用于推荐系统和大规模稀疏数据集建模的机器学习算法
 
 ## Wide & Deep
+wide&deep框架来缓和选择偏见
+
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d3f2371e-05b0-4801-a716-8157cdc339fc)
 
 ### wide 
@@ -271,6 +339,7 @@ The deep component is a feed-forward neural network
 Mixture of Experts architectures enable large-scale models, even those comprising many billions of parameters, to greatly reduce computation costs during pre-training and achieve faster performance during inference time. Broadly speaking, it achieves this efficiency through selectively activating only the specific experts needed for a given task, rather than activating the entire neural network for every task.
 
 ## MMOE Multi-gate Mixture-of-Experts
+优化多目标排序
 
 DNN-based multi-task
 learning models are sensitive to factors such as the data distribution
@@ -288,6 +357,10 @@ extensively shared among all tasks.
 ## LightGCN
 图卷积神经网络
 
+
+## 自监督学习
+
+利用无标签数据，通过自监督方法预训练模型，提高对稀疏数据的处理能力。
 ## Transformer
 Classic feed-forward neural networks (FFNs) process information by progressively passing input data from neurons in one layer to neurons in the following layer until it reaches an outer layer where final predictions occur. Some neural network architectures incorporate additional elements, like the self-attention mechanisms of transformer models, that capture additional patterns and dependencies in input data. 
 #### AUC
