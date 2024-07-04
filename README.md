@@ -154,6 +154,8 @@ i2i：通过计算item间的相似度，找到相似的item
 ## Embedding召回
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/26eb301f-2bf2-4012-8592-8cdcef6c1207)
 ### 如何embedding
+
+
 #### 基于Graph的Embedding
 核心思想是根据用户行为，构造user、item的关系图，然后采用Graph embedding方法实现对节点（即user、item）的embedding向量。
 
