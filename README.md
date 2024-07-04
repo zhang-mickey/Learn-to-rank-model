@@ -343,14 +343,27 @@ XGBoost 的特征重要性:
 	•	计算过程：统计每个特征在所有树中被用作分裂节点的次数，然后进行累加
 
 
+## LHUC（Learning Hidden Unit Contributions）
+特征就是重要的先验知识。但是有时我们自认为加入了一个非常重要的特征，但是模型效果却没有提升。很有可能是你加的位置不对。
+
+重要的特征加到DNN底部，层层向上传递，恐怕到达顶部时，也不剩多少了。另外，推荐系统中，DNN的底层往往是若干特征embedding的拼接，动辄几千维，这时你再新加入一个特征32维embedding，“泯然众人矣”，恐怕也不会太奇怪。
+## PPNet 
+由基础的DNN结构和Gate NN结构组成
+
+
 ## Wide & Deep
 wide&deep框架来缓和选择偏见
+
+
 
 ![image](https://github.com/zhang-mickey/Learn-to-rank-model/assets/145342600/d3f2371e-05b0-4801-a716-8157cdc339fc)
 
 ### wide 
 The wide component is a generalized linear model
 
+The simple architecture makes the domain features directly influence the final prediction
+
+加入wide侧的特征离最终目标也近，避免自dnn底部层层传递带来的信息损失，更有机会将我们的先验知识贯彻到“顶”。
 ### Deep
 The deep component is a feed-forward neural network 
 
@@ -360,6 +373,9 @@ The deep component is a feed-forward neural network
 
 
 ## 重排
+
+
+
 
 ## Mixture-of-Experts
 Mixture of Experts architectures enable large-scale models, even those comprising many billions of parameters, to greatly reduce computation costs during pre-training and achieve faster performance during inference time. Broadly speaking, it achieves this efficiency through selectively activating only the specific experts needed for a given task, rather than activating the entire neural network for every task.
