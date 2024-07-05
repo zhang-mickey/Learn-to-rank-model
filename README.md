@@ -12,6 +12,10 @@ term mismatch between queries and items
 ## 负采样
 用于处理推荐系统中数据稀疏和计算效率问题 
 
+如果仅在正样本上训练，则模型可能遭受折叠问题，可能会导致虚假推荐
+
+
+
 为了平衡正负样本比例，我们只使用一小部分样本进行训练
 
 主要思想是将负样本的选择转化为随机采样的问题，
@@ -27,6 +31,7 @@ NCE 并没有试图直接预测一个词的概率，而是用一个辅助性的�
 NCE的简化版
 
 ## Sampled softmax
+从全部类别中采样出一个子集
 
 ## hierarchy softmax
 可以把常规的 softmax 想成是只有一层深度的树，每个 V 中的词都是一个叶子节点。计算一个词的 softmax 的概率则需要标准化所有 |V| 个叶子的概率。反之，如果我们把 softmax 当成一个每个词都是叶子的二叉树，我们只需要从叶子节点开始沿着树的路径走到那个词，而无须考虑其它的词。
@@ -179,6 +184,13 @@ In Word2Vec,the words for the negative samples (used for the corrupted pairs) ar
 ### CBOW
 
 ### Skip gram
+
+### Deepwalk
+将随机游走和Word2Vec相结合
+
+分为随机游走和生成表示向量两个部分
+
+首先利用随机游走算法从图中提取一些顶点序列，将生成的顶点序列看成是由单词组成的句子 
 
 #### 基于Graph的Embedding
 核心思想是根据用户行为，构造user、item的关系图，然后采用Graph embedding方法实现对节点（即user、item）的embedding向量。
