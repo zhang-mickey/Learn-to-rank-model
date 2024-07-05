@@ -16,18 +16,20 @@ term mismatch between queries and items
 
 主要思想是将负样本的选择转化为随机采样的问题，
 
-## NCE
+## NCE  噪音对比估计 Noise Contrastive Estimation 
 为了解决Softmax 分母计算量过大的问题
 
 在推荐系统中的召回模块里，许多优化例如"通过负采样打压热门物品"也是通过调节NCE等算法的参数实现的 
 
+NCE 并没有试图直接预测一个词的概率，而是用一个辅助性的损失函数来同时最大化正确词的概率。
 
-
-## NEG
+## NEG 负采样  Negative Sampling
 NCE的简化版
 
 ## Sampled softmax
 
+## hierarchy softmax
+可以把常规的 softmax 想成是只有一层深度的树，每个 V 中的词都是一个叶子节点。计算一个词的 softmax 的概率则需要标准化所有 |V| 个叶子的概率。反之，如果我们把 softmax 当成一个每个词都是叶子的二叉树，我们只需要从叶子节点开始沿着树的路径走到那个词，而无须考虑其它的词。
 
 ## 
 ### 流行度负采样
