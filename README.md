@@ -21,7 +21,10 @@ term mismatch between queries and items
 主要思想是将负样本的选择转化为随机采样的问题，
 
 ## NCE  噪音对比估计 Noise Contrastive Estimation 
-为了解决Softmax 分母计算量过大的问题
+为了解决Softmax 分母计算量过大的问题。
+softmax，它将问题看作多类预测问题。
+输入是用户查询。
+输出是一个概率向量，其大小等于语料库中的项目数，表示与每个项目交互的概率
 
 在推荐系统中的召回模块里，许多优化例如"通过负采样打压热门物品"也是通过调节NCE等算法的参数实现的 
 
