@@ -384,6 +384,14 @@ XGBoost 的特征重要性:
 	•	计算过程：统计每个特征在所有树中被用作分裂节点的次数，然后进行累加
 
 
+## LambdaMART
+LambdaMART is the boosted tree version of LambdaRank 
+
+
+### NDCG
+
+
+
 ## LHUC（Learning Hidden Unit Contributions）
 特征就是重要的先验知识。但是有时我们自认为加入了一个非常重要的特征，但是模型效果却没有提升。很有可能是你加的位置不对。
 
@@ -434,9 +442,15 @@ at least some of the tasks, particularly when model parameters are extensively s
 
 ## NGCF
 用户和物品embedding的内积作为模型的预测结果
+
+
 ## LightGCN
 图卷积神经网络
 
+### GCN
+DNN 不涉及邻接矩阵，主要使用全连接层进行数据的处理。
+
+GCN 利用图的邻接矩阵进行卷积操作，考虑节点间的连接关系。
 
 ## 自监督学习
 
